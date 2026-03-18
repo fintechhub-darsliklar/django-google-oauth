@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login page</h1>
+    {{errors}}
+    <form method="post">
+        {% csrf_token %}
+        {{ userform.as_p }}
+        <button type="submit">Sign Up</button>
+        <a href="{% url 'register_page' %}">register qilish</a>
+    </form>
+    {% load socialaccount %}
+<a href="{% provider_login_url 'google' %}">Login with Google</a>
+
+</body>
+</html>
