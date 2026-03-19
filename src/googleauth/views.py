@@ -30,7 +30,7 @@ def register_page(request):
         form = UserForm(data=request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='allauth.account.auth_backends.AuthenticationBackend')
             return redirect("index")
         errors = form.errors
     form = UserForm()
