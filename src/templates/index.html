@@ -1,16 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="uz">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dashboard | MONOLITH</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#003ec7",
+                        "surface": "#fcf9f8",
+                        "on-surface": "#1c1b1b",
+                        "outline": "#737688",
+                        "surface-container": "#f0eded",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container-highest": "#e5e2e1",
+                    },
+                    fontFamily: { "headline": ["Inter"], "body": ["Inter"] }
+                },
+            },
+        }
+    </script>
 </head>
-<body>
-    <h1>Asosiy page</h1>
+<body class="bg-surface text-on-surface font-body">
 
-    <p>{{request.user}}</p>
+<div class="flex min-h-screen">
+    <aside class="w-64 bg-surface-container hidden lg:flex flex-col border-r border-outline-variant/30">
+        <div class="p-8">
+            <h1 class="text-2xl font-black tracking-tighter text-primary">MONOLITH</h1>
+        </div>
+        <nav class="flex-1 px-4 space-y-2">
+            <a href="#" class="flex items-center gap-4 px-4 py-3 bg-primary text-white rounded-lg shadow-md shadow-primary/20">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-semibold">Dashboard</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 px-4 py-3 text-outline hover:bg-surface-container-highest rounded-lg transition-colors">
+                <span class="material-symbols-outlined">analytics</span>
+                <span>Statistika</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 px-4 py-3 text-outline hover:bg-surface-container-highest rounded-lg transition-colors">
+                <span class="material-symbols-outlined">settings</span>
+                <span>Sozlamalar</span>
+            </a>
+        </nav>
+        <div class="p-4 border-t border-outline-variant/20">
+            <a href="{% url 'logout_page' %}" class="flex items-center gap-4 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="font-bold">Chiqish</span>
+            </a>
+        </div>
+    </aside>
 
-    <a href="{% url 'logout_page' %}">chiqish</a>
+    <main class="flex-1 flex flex-col">
+        <header class="h-20 bg-surface-container-low border-b border-outline-variant/20 flex items-center justify-between px-8">
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-outline">search</span>
+                <input type="text" placeholder="Qidiruv..." class="bg-transparent border-none focus:ring-0 text-sm w-64">
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-bold leading-none">{{ request.user.get_full_name|default:request.user.username }}</p>
+                    <p class="text-[10px] text-outline uppercase tracking-widest mt-1">Sizning profilingiz</p>
+                </div>
+                <div class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center text-white font-bold ring-2 ring-primary/20">
+                    {{ request.user.username|first|upper }}
+                </div>
+            </div>
+        </header>
+
+        <div class="p-8 space-y-8">
+            <section>
+                <h2 class="text-3xl font-headline font-bold">Xush kelibsiz, {{ request.user.username }}! 👋</h2>
+                <p class="text-outline mt-1">Bugungi tizim ko'rsatkichlari bilan tanishing.</p>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/20 shadow-sm">
+                    <span class="material-symbols-outlined text-primary mb-4 text-3xl">api</span>
+                    <h3 class="text-outline text-xs uppercase font-bold tracking-widest">Aktiv API lar</h3>
+                    <p class="text-3xl font-black mt-2">12 dona</p>
+                </div>
+                <div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/20 shadow-sm">
+                    <span class="material-symbols-outlined text-green-600 mb-4 text-3xl">database</span>
+                    <h3 class="text-outline text-xs uppercase font-bold tracking-widest">DB holati</h3>
+                    <p class="text-3xl font-black mt-2">Optimal</p>
+                </div>
+                <div class="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/20 shadow-sm">
+                    <span class="material-symbols-outlined text-orange-500 mb-4 text-3xl">bolt</span>
+                    <h3 class="text-outline text-xs uppercase font-bold tracking-widest">Tizim tezligi</h3>
+                    <p class="text-3xl font-black mt-2">14ms</p>
+                </div>
+            </section>
+
+            <section class="bg-surface-container-low rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
+                <div class="px-6 py-4 border-b border-outline-variant/10 flex justify-between items-center bg-white/50">
+                    <h3 class="font-bold">Oxirgi harakatlar</h3>
+                    <button class="text-xs text-primary font-bold hover:underline">Hammasini ko'rish</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="text-[10px] uppercase text-outline tracking-tighter">
+                                <th class="px-6 py-4">Harakat</th>
+                                <th class="px-6 py-4">Vaqt</th>
+                                <th class="px-6 py-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant/10 text-sm">
+                            <tr>
+                                <td class="px-6 py-4">Tizimga kirish</td>
+                                <td class="px-6 py-4 text-outline text-xs">Bugun, 09:41</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-[10px] font-bold">MUVAFFAQIYATLI</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4">Profil tahrirlash</td>
+                                <td class="px-6 py-4 text-outline text-xs">Kecha, 18:20</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-[10px] font-bold">YANGILANDI</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
 
 </body>
 </html>
