@@ -82,4 +82,5 @@ Google orqali kirish ishlashi uchun:
 
 **Muallif:** Ziyodullo Aliyev  
 **Sohasi:** Backend va Full-stack dasturchi
-```
+**Loyiha nomi:** Monolith - Django Auth System
+**Loyiha link:** [Monolith - Django Auth System](https://fintechhubprojectoauth.pythonanywhere.com)
