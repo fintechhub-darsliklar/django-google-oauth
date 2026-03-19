@@ -1,4 +1,3 @@
-```markdown
 # 🏛️ MONOLITH - Django Auth System
 
 Ushbu loyiha zamonaviy **Django** freymvorki va **Tailwind CSS** yordamida yaratilgan eksklyuziv autentifikatsiya tizimidir. Loyiha ham oddiy login/register, ham Google orqali kirish (OAuth2) imkoniyatlarini o'z ichiga oladi.
